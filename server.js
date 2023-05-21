@@ -1,14 +1,15 @@
 let express = require("express");
 const app = express();
 
-const port = 3000;
+async function start(port = 3000) {
+  app.use(express.static("public"));
+  return await new Promise((resolve, reject) => {
+    app.listen(port, () => {
+      let returnData = { return: true, port: port };
+      console.log("-->server running:", returnData);
+      resolve(returnData);
+    });
+  });
+}
 
-app.use(express.static("public"));
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
-
-module.exports = {
-  port,
-};
+module.exports = { start };

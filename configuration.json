@@ -1,0 +1,12 @@
+{
+    "server": {
+        "port": 3000
+    },
+    "window": {
+        "autoHideMenuBar": false,
+        "size": {
+            "width": 700,
+            "height": 500
+        }
+    }
+}
