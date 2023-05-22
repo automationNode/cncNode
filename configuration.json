@@ -8,5 +8,8 @@
             "width": 700,
             "height": 500
         }
+    },
+    "cnc":{
+        "port": "COM3"
     }
 }
