@@ -5,8 +5,8 @@
     "window": {
         "autoHideMenuBar": false,
         "size": {
-            "width": 700,
-            "height": 500
+            "width": 1000,
+            "height": 800
         }
     },
     "cnc":{

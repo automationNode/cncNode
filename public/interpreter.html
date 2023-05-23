@@ -10,6 +10,16 @@
     <title>Cnc Node Interpreter</title>
   </head>
   <body>
-    <div style="text-align: center"></div>
+    <div style="text-align: center">
+    
+      <textarea id="communicationOutput" contenteditable="true" style="width: 90%; margin-left: 5%; margin-top: 5%; min-height: 74%; max-height: 75%;" rows="18"></textarea>
+      <br>
+      <div style="width: 90%; margin-left: 5%; margin-bottom: 5%; bottom: 5%; position: absolute;">
+        <input type="text" id="communicationInput" placeholder="Write your code" style="width: 80%;">
+        <button id="buttonSend" class="btn btn-primary">Send</button>
+      </div>
+
+    </div>
   </body>
+  <script src="./interpreter.js" type="module"></script>
 </html>

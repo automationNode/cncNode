@@ -7,7 +7,7 @@
     "start": "electron .",
     "compile:win32": "electron-packager . cncNode --overwrite --prune=true --platform=win32 --arch=x64 --icon=./icon.ico --executableName=cncNode --dir=./ --out=./distributions --ignore=./distributions && node compile.js"
   },
-  "author": "José Rosendo Soto Reza, Irvin Cruz",
+  "author": "José Rosendo Soto Reza and Irvin Cruz",
   "license": "ISC",
   "dependencies": {
     "@electron/remote": "^2.0.9",

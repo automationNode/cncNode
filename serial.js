@@ -1,8 +1,10 @@
 let serialPort = require("serialport");
 
 let communication;
+let historyMessage = "";
 let lastEndLineMessage = "";
 let lastMessage = "";
+
 
 async function start(port = "COM3") {
   communication = new serialPort.SerialPort({
@@ -16,6 +18,7 @@ async function start(port = "COM3") {
         let string = buffer.toString();
         for (let char of string) {
           lastMessage += char;
+          historyMessage += char;
           if (char == "\n") {
             lastEndLineMessage = "";
           } else {
@@ -45,20 +48,38 @@ async function getLastEndLineMessage() {
   return lastEndLineMessage;
 }
 
-async function getLastMesage() {
+async function getLastMessage() {
   let returnMessage = lastMessage;
   lastMessage = "";
   return returnMessage;
+}
+
+async function getStatus() {
+  try{
+    if (communication.isOpen) {
+      return true;
+    } else {
+      return false;
+    }
+  }catch{
+    return false;
+  }
 }
 
 async function end() {
   communication.close();
 }
 
+async function getHistoryMessage(){
+  return historyMessage;
+}
+
 module.exports = {
   start,
   end,
-  getLastMesage,
+  getLastMessage,
+  getHistoryMessage,
   getLastEndLineMessage,
   writeMessage,
+  getStatus,
 };
