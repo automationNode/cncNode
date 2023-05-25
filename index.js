@@ -1,36 +1,25 @@
 console.log("-->starting software");
 
+let configuration = require("./configuration.js");
 let server = require("./server.js");
 let window = require("./window.js");
 let serial = require("./serial.js");
-let utils = require("./utils.js");
-let fs = require("fs-extra");
 
 start();
 
 async function start() {
   try {
-    let configuration = JSON.parse(
-      fs.readFileSync("configuration.json", {
-        encoding: "utf-8",
-      })
-    );
-    let package = JSON.parse(
-      fs.readFileSync("package.json", {
-        encoding: "utf-8",
-      })
-    );
-    console.log("-->configuration:", configuration);
+    console.log("-->configuration:", configuration.getServerConfiguration());
 
-    let result = await server.start(configuration, package, serial);
+    let result = await server.start(configuration, serial);
     if (result.return) {
       await window.start(
-        configuration.server.port,
-        configuration.window.size.width,
-        configuration.window.size.height,
-        configuration.window.autoHideMenuBar
+        configuration.getServerConfiguration().server.port,
+        configuration.getServerConfiguration().window.size.width,
+        configuration.getServerConfiguration().window.size.height,
+        configuration.getServerConfiguration().window.autoHideMenuBar
       );
-      await serial.start(configuration.cnc.port);
+      await serial.start(configuration.getServerConfiguration().cnc.port);
     }
   } catch (error) {
     console.error(error);

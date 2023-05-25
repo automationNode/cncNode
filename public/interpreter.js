@@ -26,7 +26,7 @@ buttonSend.addEventListener("click", async function () {
 }
 });
 
-communicationOutput.style.height = 20 + communicationOutput.scrollHeight + "px";
+//communicationOutput.style.height = 20 + communicationOutput.scrollHeight + "px";
 let lastHistoryMessage = "";
 
 setInterval(async function () {

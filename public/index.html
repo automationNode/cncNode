@@ -13,6 +13,10 @@
     <div style="text-align: center;">
         <img src="./icon.png" style="width: 20%; margin: 5%;" id="logo">
         <br>
+        <div class="bg-dark" style="width: 40%; margin-left: 30%; text-align: center; color: white; border-radius: 10px;">
+            <h1>Cnc Node</h1>
+        </div>
+        <br>
         <a href="./motion.html" target="_blank" class="btn btn-primary">Motion</a>
         <a href="./interpreter.html" target="_blank" class="btn btn-secondary">Interpreter</a>
         <a href="./executer.html" target="_blank" class="btn btn-dark">Executer</a>
@@ -20,6 +24,8 @@
     <br>
     <div>
         <div id="divCommunicationStatus" class="bg-dark" style="color: white; border-radius: 10px; width: 30%; margin: 5%; margin-left: 35%; text-align: center;">Checking communication</div>
+        <select id="selectPort" class="btn btn-dark btn-sm" style="color: white; width: 40%; margin-left: 30%; border-radius: 10px; text-align: center; display: none; margin-top: 2rem; margin-bottom: 2rem;"></select>
+        <div id="buttonConnect" class="btn btn-dark btn-sm" style="color: white; width: 20%; margin-left: 40%; border-radius: 10px; text-align: center; display: none;">Connect</div>
     </div>
 </body>
 <script src="./index.js" type="module"></script>

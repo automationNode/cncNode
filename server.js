@@ -1,7 +1,7 @@
 let express = require("express");
 const app = express();
 
-async function start(configuration, package, serial) {
+async function start(configuration, serial) {
   app.use(express.static("public"));
   app.use(express.json());
 
@@ -10,12 +10,12 @@ async function start(configuration, package, serial) {
     let returnJson = request.body;
 
     if (returnJson["getServerPackage"]) {
-      returnJson["data"] = package;
+      returnJson["data"] = configuration.getServerPackage();
       returnJson["return"] = true;
     }
 
     if (returnJson["getServerConfiguration"]) {
-      returnJson["data"] = configuration;
+      returnJson["data"] = configuration.getServerConfiguration();
       returnJson["return"] = true;
     }
 
@@ -24,8 +24,16 @@ async function start(configuration, package, serial) {
       returnJson["return"] = true;
     }
 
+    if (returnJson["getCommunicationPorts"]) {
+      returnJson["data"] = await serial.getPorts();
+      returnJson["return"] = true;
+    }
+
     if (returnJson["startCommunication"]) {
-      returnJson["data"] = await serial.start(configuration.cnc.port);
+      let _configuration = configuration.getServerConfiguration();
+      _configuration.cnc.port = returnJson["port"];
+      returnJson["data"] = await serial.start(_configuration.cnc.port);
+      configuration.setServerConfiguration(_configuration);
       returnJson["return"] = true;
     }
 
@@ -60,8 +68,8 @@ async function start(configuration, package, serial) {
   });
 
   return await new Promise((resolve, reject) => {
-    app.listen(configuration.server.port, () => {
-      let returnData = { return: true, port: configuration.server.port };
+    app.listen(configuration.getServerConfiguration().server.port, () => {
+      let returnData = { return: true, port: configuration.getServerConfiguration().server.port };
       console.log("-->server running:", returnData);
       resolve(returnData);
     });

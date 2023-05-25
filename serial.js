@@ -5,7 +5,6 @@ let historyMessage = "";
 let lastEndLineMessage = "";
 let lastMessage = "";
 
-
 async function start(port = "COM3") {
   communication = new serialPort.SerialPort({
     path: port,
@@ -55,13 +54,13 @@ async function getLastMessage() {
 }
 
 async function getStatus() {
-  try{
+  try {
     if (communication.isOpen) {
       return true;
     } else {
       return false;
     }
-  }catch{
+  } catch {
     return false;
   }
 }
@@ -70,8 +69,12 @@ async function end() {
   communication.close();
 }
 
-async function getHistoryMessage(){
+async function getHistoryMessage() {
   return historyMessage;
+}
+
+async function getPorts() {
+  return await serialPort.SerialPort.list();
 }
 
 module.exports = {
@@ -82,4 +85,5 @@ module.exports = {
   getLastEndLineMessage,
   writeMessage,
   getStatus,
+  getPorts,
 };
